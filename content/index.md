@@ -1,5 +1,5 @@
 ---
-title: Note for Discrete Math for Computer Science
+title: Notes for Discrete Math for Computer Science
 ---
 
 > [!Warning] Note:
