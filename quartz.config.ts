@@ -14,7 +14,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: null,
     locale: "en-US",
-    baseUrl: "https://notes-for-computer-science.github.io/discrete-math/",
+    baseUrl: "notes-for-computer-science.github.io/discrete-math",
     ignorePatterns: ["private", "templates", "Excalidraw", ".obsidian"],
     defaultDateType: "created",
     theme: {

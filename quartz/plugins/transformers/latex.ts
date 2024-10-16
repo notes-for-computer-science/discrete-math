@@ -32,12 +32,17 @@ export const Latex: QuartzTransformerPlugin<Partial<Options>> = (opts) => {
         return {
           css: [
             // base css
-            "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css",
+            "/static/katex.min.css",
           ],
           js: [
             {
+              src: "/static/katex.min.js",
+              loadTime: "afterDOMReady",
+              contentType: "external",
+            },
+            {
               // fix copy behaviour: https://github.com/KaTeX/KaTeX/blob/main/contrib/copy-tex/README.md
-              src: "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js",
+              src: "/static/copy-tex.min.js",
               loadTime: "afterDOMReady",
               contentType: "external",
             },
