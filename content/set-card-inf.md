@@ -279,14 +279,73 @@ Okay, now you know what a problem $Q : \mathbb{I} \to \{true, false\}$ is. I'll 
 
 Let $\mathcal{Q}$ be the set of all problems $\{ Q \subseteq (\mathbb{I} \times \{true, false\}) : Q\text{ is a function } \mathbb{I} \to \{true, false\} \}$. Yes we can formalise set using first order logic, but I'll skip that, we're doing big picture right now.
 
-Now, what is the cardinality of $\mathcal{Q}$? I'm actually going to show you that $\lvert \mathcal{Q}\rvert = \lvert \mathbb{R} \rvert$. How do we do this? Here's the trick: We will construct a bijection between $\mathcal{Q}$ and the real interval $[0, 1]$. And we know this interval itself [[#Cantor's Diagonalisation Argument|has cardinality strictly larger than any countably infinite set]]. Thanks Dr. Georg Cantor.
+Now, what is the cardinality of $\mathcal{Q}$? I'm actually going to show you that $\lvert [0, 1] \rvert \leq \lvert \mathcal{Q} \rvert$. How do we do this? Here's the trick:  We will construction an injection $c : [0, 1] \to \mathcal{Q}$. And we know this interval itself [[#Cantor's Diagonalisation Argument|has cardinality strictly larger than any countably infinite set]]. Thanks Dr. Georg Cantor.
 
-To construct this bijection would mean to take a $Q$ in $\mathbb{Q}$, and uniquely map it to a real number in $[0, 1]$. We take $Q : \mathbb{I} \to \{true, false\}$, and first make $Q' : \mathbb{I} \to \{0, 1\}$. Then we make a function $c : \mathbb{N} \to \{0, 1\}$. $Q'$ is basically $Q$ but remapping $true$ to $1$, and $false$ to $0$. Then $c$ is basically making use o the fact that $\mathbb{I}$ is countably infinite, so we can replace the domain of $Q'$ with $\mathbb{N}$ using a bijection. Then what is $c$? $c$ basically lists out an infinite sequence of 0's and 1's. What happens if we interpret this sequence as a fractional number in binary? Then we just get all of the numbers in the interval $[0, 1]$! So each $Q \in \mathcal{Q}$ now maps to $x_Q \in [0, 1]$. 
+The overall idea is the following:
+1. Take $x \in [0, 1]$.
+2. Write $x$ out in binary expansion as $\sum_{i \in \mathbb{Z}^+} x_i \cdot 2^{-i}$, where $x_j \in \{0, 1\}$, for all $i \in \mathbb{Z}^+$.
+3. Then when $x_i$ is $1$, we map it to $true$, and $x_i$ is $0$, we map it to $false$.
+4. Then this sequence of $true$ and $false$ defines a problem $Q$.
+5. The last thing to do is to map the sequence back into $\mathbb{I}$.
 
-1. Let $Q \in \mathcal{Q}$. Then $Q : \mathbb{I} \to \{true, false\}$.
-2. Since $\lvert \mathbb{I}\rvert = \lvert \mathbb{N} \rvert$, exists bijective $f : \mathbb{N} \to \mathbb{I}$.
-3. Consider function $c: \mathbb{N} \to \{0, 1\}$:
-	1. $c : i \mapsto \begin{cases} 1, \text{ if } Q(f(i)) = true \\ 0, \text{ if } Q(f(i)) = false\end{cases}$
-	2. Note: $f$ bijects $\mathbb{N}$ to $\mathbb{I}$, and $Q$ maps the output of $f$ to either $true$ or $false$.
-			Then $true$ is mapped to $1$ and $false$ is mapped to 0.
-		
+![[Excalidraw/problem-to-decimal.light.png]]
+
+Pseudo-formally: We want to create a mapping $c : [0, 1] \to Q$ where $c$ is injective.
+1. Since $\mathbb{I}$ is a countably infinite set, there exists a bijective function $f : \mathbb{Z}^+ \to \mathbb{I}$.
+2. Let $x \in [0, 1]$. Then $x$ can be written as $\sum_{i \in \mathbb{Z}^+} x_i \cdot 2^{-i}$, where $x_i \in \{0, 1\}$, for all $i \in \mathbb{Z}^+$.
+	1. Alternatively, one can say there is a corresponding function $b : \mathbb{Z}^+ \to \{0, 1\}$ for which $x = \sum_{i = 1}^{\infty} b(i) \cdot 2^{-i}$. 
+3. Create a mapping $d : \mathbb{Z}^+ \to \{true, false\}$, where:
+	1. $d(i) = true$ if $x_i = 1$;
+	2. $d(i) = false$ if $x_i = 0$
+	3. Note: $d$ is a bijection.
+4. Since $\lvert \mathbb{Z}^+ \rvert = |\mathbb{Z}| = |\mathbb{I}|$, exists a bijective function $f: \mathbb{I} \to \mathbb{Z}^+$.
+5. We now move to create a problem $Q$. This means $Q$ has to be a function from $\mathbb{I} \to \{true, false\}$.
+	1. On input $I \in \mathbb{I}$, note that since $f$ is a function, $f$ maps $I$ to a unique value $n \in \mathbb{Z}^+$. 
+	2. Since $f : \mathbb{I} \to \mathbb{Z}^+$, $b : \mathbb{Z}^+ \to \{0, 1\}$, $d : \{0, 1\} \to \{true, false\}$ are functions, then:
+	3. $(d \circ b \circ f) : \mathbb{I} \to \{true, false\}$ is a well-defined function.
+	4. Define $Q = (d \circ b \circ f)$.
+	   Note, the choice of $b$ depends on $x$. The choice of $f$ and $d$ are fixed beforehand. Furthermore, $f$ and $d$ are bijections.
+6. Then $Q$ is a function $\mathbb{I} \to \{true, false\}$.
+7. Thus, for an arbitrary $x \in [0, 1]$, we have constructed a function $Q_x$. Thus by universal generalisation, $\forall x\in [0, 1]$, $\exists Q [Q : \mathbb{I} \to \{true, false\}]$. In other words, on any input $x$, there exists an output $Q$.
+8. Furthermore, let $x_1, x_2 \in [0, 1]$ be arbitrarily chosen such that $Q_1$ was created (using lines 1-5) using $x_1$, and $Q_2$ was created using $x_2$. And further assume $Q_1 \neq Q_2$.
+9. Then, there exists $I \in \mathbb{I}$ such that $Q_1(I) \neq Q_2(I)$. (They differ when given input $I$.)
+10.  Since $Q_1(I) = d(b_1(f(I)))$ and $Q_2(I) = d(b_2(f(I)))$, and $d$ is a bijection:
+11. $Q_1(I) \neq Q_2(I)$ imply that $d(b_1(f(I))) \neq d(b_2(f(I)))$.
+12. And because $d$ is a bijection, $b_1(f(I)) \neq b_2(f(I))$.
+13. Therefore $x_1$ and $x_2$ differ in their binary representation at location $f(I) \in \mathbb{Z}^+$.
+14. Therefore $Q_1 \neq Q_2 \to x_1 \neq x_2$.
+15. By contrapositivity: $x_1 = x_2 \to Q_1 = Q_2$.
+16. Therefore $\forall x_1, x_2 [x_1 = x_2 \to Q_1 = Q_2]$, where $Q_1$ is created from $x_1$ and $Q_2$ is created from $x_2$
+17. Therefore define $c : [0, 1] \to \mathcal{Q}$ to be a mapping where on input $x$, it outputs $Q : \mathbb{I} \to \{true, false\}$ by using lines 5.1 through 5.4.
+18. By lines 7, and 15, $c$ is a well-defined function since on every input, it has an output. Furthermore, on inputs $x_1 = x_2$, $c(x_1) = c(x_2)$.
+
+We're not done! We need to argue that $c$ is injective.
+
+Pseudo-proof:
+1. Let $x_1, x_2 \in [0, 1]$. Assume that $c(x_1) = c(x_2)$.
+2. Let $c(x_1) = Q_1$, let $c(x_2) = Q_2$.
+3. Since $Q_1 = Q_2$, $\forall I \in\mathbb{I}[Q_1(I) = Q_2(I)]$.
+4. Now, $\forall I \in\mathbb{I}[d(b_1(f(I))) = d(b_2(f(I)))]$.
+5. Since $d$ bijective, this means: $\forall I \in\mathbb{I}[b_1(f(I)) = b_2(f(I))]$.
+6. Assume for the sake of contradiction that $x_1 \neq x_2$. Then $\exists n \in \mathbb{Z}^+$ for which $b_1(n) \neq b_2(n)$.
+	1. Since $f$ is surjective, exists $I_n \in \mathbb{I}$ for which $f(I_n) = n$. Now: $b_1(f(I_n)) = b_1(n) \neq b_2(n) = b_2(f(I_n))$.
+	2. Contradiction, since $\forall I \in\mathbb{I}[b_1(f(I)) = b_2(f(I))]$.
+7. Therefore, $x_1 \neq x_2$. \[Negation of assumption on line 6.]
+
+This means that $c$ is an injection from $[0, 1] \to \mathcal{Q}$. So now we say "the cardinality of $[0, 1]$ is less than or equals to the cardinality of $\mathcal{Q}$, the set of all computer problems".
+
+Ok what about the cardinality of the set of all computer problems? What is $\lvert \mathbb{P} \rvert$? I'm going to appeal to your intuition here. Computer programs have to be finite in length. Regardless of whether you're writing Source, or Python, or Javascript. The program description must always be finite in length. And for the sake of simplicity, let's say the program code can only take on 256 possible characters. [^1] So a code is a finite sequence of $\mathbb{Z}_{256}$, effectively. As a shorthand, $(\mathbb{Z}_{256})^t$ is basically a $t$ length sequence where each element in the sequence is one of $256$ possible values. Now $\mathbb{P} = \bigcup_{t \in \mathbb{Z}^+} (\mathbb{Z}_{256})^t$. By the way, $\bigcup_{t \in \mathbb{Z}^+} (\mathbb{Z}_{256})^t$ is **countably infinite**. So, $\mathbb{P}$ is countably infinite.
+
+So that is to say:
+$$
+\lvert \mathbb{P} \rvert = \aleph_0 \lneq \aleph_1 \leq \big\lvert [0, 1] \big\rvert \leq \lvert \mathcal{Q} \rvert
+$$
+
+So what does this show? This shows there are no possible bijections between the set of computer programs $\mathbb{P}$, and the set of computer problems $\mathcal{Q}$. What does no bijection mean? We know that since $\lvert \mathbb{P} \rvert \lneq \lvert \mathcal{Q} \rvert$, there is an injection from $\mathbb{P}$ to $\mathcal{Q}$ but no surjection (or else a bijection would exist). Intuitively, this means there are **way more problems than there are solutions**. 
+
+You might think: That's it? We only know they exist? Can we at least solve everything that we care about? Well...
+## The Halting Problem
+
+
+
+[^1]: Yes I know unicode is a thing. I'm too lazy to mention how many codepoints there are etc.
