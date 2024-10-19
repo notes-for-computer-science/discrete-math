@@ -41,7 +41,7 @@ And yes, we will basically say $\lvert A \rvert = \lvert B \rvert$ if and only i
 > [!Theorem]
 > If there exists injective functions $f : A \to B$, $g : B \to A$ between sets $A, B$. Then there exists bijective function $h : A \to B$.
 
->[!Pop Quiz]+ 
+>[!Quiz]+ 
 > Notice that the theorem statements says if injective $f, g$ exists, then bijective $h$ exists. What about the other direction? If $h : A \to B$ is bijective, can we find injective functions $f : A \to B$ and $g : B \to A$?
 > > [!Answer]-
 > > 
@@ -230,7 +230,7 @@ I'll drawn some diagrams that might help explain the idea:
 #### Diagrammatically:
 The idea is that any number between 0 and 1 and can be written out in the following way:
 
-![[Excalidraw/Cantor.light.png|Center]]
+![[Images/Cantor.light.png|Center]]
 
 
 Where all of the $d(j)_{g(i)}$ happens to be a number between 0 and 9. So in particular:
@@ -241,7 +241,7 @@ $$
 
 So what happens if we took every number on the diagonal and collected them. Then did a bunch of changing? Like so:
 
-![[Excalidraw/Cantor-changed.light.png|Center]]
+![[Images/Cantor-changed.light.png|Center]]
 
 As long as we make all the $y_i$ values a value between 1 and 8 (inclusive) then 
 $$
@@ -279,7 +279,7 @@ Okay, now you know what a problem $Q : \mathbb{I} \to \{true, false\}$ is. I'll 
 
 Let $\mathcal{Q}$ be the set of all problems $\{ Q \subseteq (\mathbb{I} \times \{true, false\}) : Q\text{ is a function } \mathbb{I} \to \{true, false\} \}$. Yes we can formalise set using first order logic, but I'll skip that, we're doing big picture right now.
 
-Now, what is the cardinality of $\mathcal{Q}$? I'm actually going to show you that $\lvert [0, 1] \rvert \leq \lvert \mathcal{Q} \rvert$. How do we do this? Here's the trick:  We will construction an injection $c : [0, 1] \to \mathcal{Q}$. And we know this interval itself [[#Cantor's Diagonalisation Argument|has cardinality strictly larger than any countably infinite set]]. Thanks Dr. Georg Cantor.
+Now, what is the cardinality of $\mathcal{Q}$? I'm actually going to show you that $\lvert [0, 1] \rvert \leq \lvert \mathcal{Q} \rvert$. How do we do this? Here's the trick:  We will construct an injection $c : [0, 1] \to \mathcal{Q}$. And we know this interval itself [[#Cantor's Diagonalisation Argument|has cardinality strictly larger than any countably infinite set]]. Thanks Dr. Georg Cantor.
 
 The overall idea is the following:
 1. Take $x \in [0, 1]$.
@@ -288,7 +288,7 @@ The overall idea is the following:
 4. Then this sequence of $true$ and $false$ defines a problem $Q$.
 5. The last thing to do is to map the sequence back into $\mathbb{I}$.
 
-![[Excalidraw/problem-to-decimal.light.png]]
+![[Images/problem-to-decimal.light.png]]
 
 Pseudo-formally: We want to create a mapping $c : [0, 1] \to Q$ where $c$ is injective.
 1. Since $\mathbb{I}$ is a countably infinite set, there exists a bijective function $f : \mathbb{Z}^+ \to \mathbb{I}$.
@@ -346,6 +346,36 @@ So what does this show? This shows there are no possible bijections between the 
 You might think: That's it? We only know they exist? Can we at least solve everything that we care about? Well...
 ## The Halting Problem
 
+Consider the following problem:
 
+> [!Example]
+> Let $P$ be a computer program, and $\langle P' \rangle$ denote the code of computer program $P'$. For simplicity, we will think of computer programs as functions that take any string as input, and outputs $\{true, false\}$, **if it terminates**.
+> 
+> The **halting problem**, when set of inputs $\mathbb{I}$ is the set of all computer program code and input pairs $\langle P \rangle$. I.e. $\mathbb{I} = \{ (\langle P \rangle, I) : P\text{ is a computer program}, I\text{ is input for the program} \}$. **On input $(\langle P \rangle, I)$**, decide if $P(I)$ terminates. 
 
+Now you might think. Oh this is easy. Just take $\langle P \rangle$, run the program $P(I)$, then when it outputs something, just say $true$, because it halted. But what if it doesn't halt? How would we know?
+
+The answer is that we actually can't solve the **halting problem** in general.
+
+> [!Theorem]
+> The halting problem is **undecidable/uncomputable**.
+
+The idea is really similar to [[#Cantor's Diagonalisation Argument]], we will assume for the sake of contradiction there is a computer program $D$ that solves this problem, we will make use of the fact that computer programs have a bijection to $\mathbb{N}$ and therefore **it is a fact** that **every program** can be enumerated in a sequence. And then assuming the existence of $D$ then we will construct a computer program $\hat{D}$ that is not enumerated in this sequence. This gives us a contraction, leading us to conclude that $D$ must not be able to exist.
+
+Again, we will just use this very useful lemma:
+
+> [!Lemma]
+> The set of all computer programs $P$ has a bijection to $\mathbb{N}$.
+
+Intuitively, this is true, because every program code $\langle P \rangle$ can be written as a finite sequence of characters from a finite set of characters (like ASCII).
+
+Proof by contradiction
+1. Assume that exists a program $D$ that solves the **halting problem**. 
+2. This means it always terminates, and always outputs a correct answer when given input $\langle P \rangle$ and $I$, it says $true$ if 
+3. Create a new program $\hat{D}$ in the following way:
+	1. On input $(\langle P \rangle, I)$, output $true$ if $D(\langle P\rangle)$ outputs $false$.
+	2. Otherwise, output $false$.
+4. ****
+
+---
 [^1]: Yes I know unicode is a thing. I'm too lazy to mention how many codepoints there are etc.
