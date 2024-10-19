@@ -15,7 +15,7 @@ const config: QuartzConfig = {
     analytics: null,
     locale: "en-US",
     baseUrl: "notes-for-computer-science.github.io/discrete-math",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    ignorePatterns: ["private", "templates", "Excalidraw", ".obsidian"],
     defaultDateType: "created",
     theme: {
       fontOrigin: "googleFonts",
