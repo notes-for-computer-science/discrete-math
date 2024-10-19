@@ -6,12 +6,13 @@ tags:
 hidden:
 ---
  
-In our journey of formalising everything that we know, it's reinspect something that we've taken for granted. Set sizes. Thus far we've sort of been eyeballing it for finitely sized sets. E.g. $A = \{1, 2, 5\}$ so we say that $\lvert A \rvert = 3$. So how do we say $\lvert A \rvert < \lvert B \rvert$? We'd probably say $\lvert A \rvert = s_A, \lvert B \rvert = s_B$ with $s_A, s_B \in \mathbb{N}$. Then if $s_A < s_B$, then we know $\lvert A \rvert < \lvert B \rvert$.
+In our journey of formalising everything that we know, let's reinspect something that we've taken for granted: Set sizes. Thus far we've sort of been eyeballing it for finitely sized sets. E.g. $A = \{1, 2, 5\}$ so we say that $\lvert A \rvert = 3$. So how do we say $\lvert A \rvert < \lvert B \rvert$? We'd probably say $\lvert A \rvert = s_A, \lvert B \rvert = s_B$ with $s_A, s_B \in \mathbb{N}$. Then if $s_A \leq s_B$, then we know $\lvert A \rvert \leq \lvert B \rvert$.
 
 But here, there are many things that actually have been left unformalised, and also unsolved. For example:
-1. Okay let's say we accept that we can compare two natural numbers for free (which actually can be formalised).
-2. How do we rigorously say that the size of a set $\lvert A \rvert = n$? You might say "sure I can just list them out and count." but that's not enough for mathematicians.
-3. Even more worryingly, we've only talked about finite sets. What about infinite sets? You could count until the cows come home and never be done.
+1. Okay let's say we accept that we can compare two natural numbers for free (which actually can be formalised, but story for another day).
+2. How do we rigorously say that the size of a set $\lvert A \rvert = n$? You might say "I can just list them out and count." but sometimes that's not enough for mathematicians.
+3. Even more worryingly, we've only talked about finite sets. What about infinite sets? You could count until the cows come home and never be done. 
+4. Is there only one infinity? We all know that $\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$ all behave a little different. $\mathbb{N}$ seems to only be infinite in one way, $\mathbb{Z}$ seems to be infinite in two ways, $\mathbb{Q}$ seems to be so infinite, you can take two items and find infinitely many items between them (where "between" is based on the $<$ relation). $\mathbb{R}$ seems to be so infinite it even contains infinitely many more items that $\mathbb{Q}$ does not. But are their "sizes" different? 
 
 So let's talk about how to formalise these things and study not just counting the sizes of finite sets, but the sizes of infinite sets, and see how infinity behaves.
 
@@ -26,9 +27,9 @@ So let's talk about how to formalise these things and study not just counting th
 ## Let's begin!
 Our starting point is picking up where we let off with functions. So recall:
 A function $f : A \to B$ is:
-1. Injective, if and only if $\forall a_1, a_2 \in A [f(a_1) = f(a_2) \to a_1 = a_2]$
-2. Surjective, if and only if $\forall b \in B, \exists a \in A [f(a) = b]$
-3. Bijective, if and only $f$ is both injective and surjective.
+1. Injective, if and only if, $\forall a_1, a_2 \in A [f(a_1) = f(a_2) \to a_1 = a_2]$
+2. Surjective, if and only if, $\forall b \in B, \exists a \in A [f(a) = b]$
+3. Bijective, if and only if, $f$ is both injective and surjective.
 
 The idea is the following: We will say that $\lvert A \rvert \leq \lvert B \rvert$ if **there exists** a function $f : A \to B$ such that $f$ is injective. The intuition is the following: If the "size" of $A$ is less than or equals to the "size" of $B$, then we should be able to associate every item of $A$ with a unique item of $B$. This "association" is basically proven by giving $f$.
 
