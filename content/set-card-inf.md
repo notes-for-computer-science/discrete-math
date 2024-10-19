@@ -33,11 +33,17 @@ A function $f : A \to B$ is:
 
 The idea is the following: We will say that $\lvert A \rvert \leq \lvert B \rvert$ if **there exists** a function $f : A \to B$ such that $f$ is injective. The intuition is the following: If the "size" of $A$ is less than or equals to the "size" of $B$, then we should be able to associate every item of $A$ with a unique item of $B$. This "association" is basically proven by giving $f$.
 
-And yes, we will basically say $\lvert A \rvert = \lvert B \rvert$ if and only if $\lvert A \rvert \leq \lvert B \rvert$ and $\lvert B \rvert \leq \lvert A \rvert$. That means giving an injective function $f : A \to B$ and also an injective function $g : B \to A$.
+Furthermore, if $\lvert A \rvert \leq \lvert B \rvert$, and $\lvert B \rvert \leq |A|$ then we will say $\lvert A \rvert = \lvert B \rvert$.
 
-**But wait. If there is a bijection $h : A \to B$, can't we also say $\lvert A \rvert = \lvert B \rvert$?** Yes. Yes you can.
+>[!Aside]
+>Notice here I am saying that the $\lvert A \rvert$ here cannot actually yet mean a number. We must take two sets $A, B$ and then surround them by $\vert$, and then this thing can sandwich a $\leq$ symbol if and only if there exists an injection $f : A \to B$.
+>
+>So at least in the current formalisation: We can only compare set sizes, and we can only argue set cardinalities relatively between $A$ and $B$. We cannot say $\lvert A \rvert = n$ for some $n \in \mathbb{N}$.
 
-**...So you're telling me, if I have $f : A \to B$, and $g : B \to A$ both injective functions, then there exists a bijection $h : A \to B$?** Yes! This is called the [Cantor-Schroder-Bernstein theorem](https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem).
+> **But wait. If there is a bijection $h : A \to B$, can't we also say $\lvert A \rvert = \lvert B \rvert$?** Yes. Yes you can.
+
+> **...So you're telling me, if I have $f : A \to B$, and $g : B \to A$ both injective functions, then there exists a bijection $h : A \to B$?**
+> Yes! This is called the [Cantor-Schroder-Bernstein theorem](https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem).
 
 > [!Theorem]
 > If there exists injective functions $f : A \to B$, $g : B \to A$ between sets $A, B$. Then there exists bijective function $h : A \to B$.
@@ -53,18 +59,17 @@ And yes, we will basically say $\lvert A \rvert = \lvert B \rvert$ if and only i
 ## Using functions to talk about set cardinalities
 
 ### Finite Sets
-So the first thing we should do is talk about finiteness. Now we can be formal. From this point on, we will use $\mathbb{Z}_n$ as a **shorthand (this is not standard notation)** to denote the set $\{1, 2, 3, \ldots, n\} = \{x : x \in \mathbb{Z} \land x \geq 1 \land x \leq n\}$.
+So the first thing we should do is talk about finiteness. Now we can be formal. From this point on, we will use $\mathbb{Z}_n$ as a **shorthand (this is not standard notation)** to denote the set $\{1, 2, 3, \ldots, n\} = \{x : x \in \mathbb{Z} \land x \geq 1 \land x \leq n\}$. [^assumption-nat]
 
 Then, we will say a set $A$ is finite if:
 1. $A$ is the empty set.
 2. There exists an $n \in \mathbb{Z}$ and a bijection function $f : A \to \mathbb{Z}_n$.
 
 Intuitively, a finite set either has 0 elements, or it has $n$ elements for some $n \in \mathbb{Z}$. The function $f$ here is basically just telling you how to show it has $n$ elements by literally saying: "This is element 1... this is element 2..." and so on.
-
-****## Infinite Sets
+## Infinite Sets
 Okay let's move onto infinite sets because here's where things get very interesting.
 So cardinality gets a bit weirder when infinite sets are a thing. For example, $\lvert \mathbb{N}\rvert = \lvert \mathbb{Z} \rvert = \lvert \mathbb{Q} \rvert$.
-In fact, let $O = \{2x + 1 : x \in \mathbb{N}\}$. We can also say $\lvert O \rvert = \lvert \mathbb{N} \rvert$. That seems weird, clearly there are more natural numbers than odd numbers. And perhaps you can say that. That's why we say: **the cardinalities are the same**. Cardinalities are our way of talking about "size" between sets.
+In fact, let $O = \{2x + 1 : x \in \mathbb{N}\}$. We can also say $\lvert O \rvert = \lvert \mathbb{N} \rvert$. That seems weird, clearly there are more natural numbers than odd numbers. And perhaps you can say that. That's why we say: the cardinalities are the same. Cardinalities are our way of talking about "size" between sets.
 
 > [!Note] 
 > A few things to note:
@@ -380,3 +385,5 @@ Proof by contradiction
 
 ---
 [^1]: Yes I know unicode is a thing. I'm too lazy to mention how many codepoints there are etc.
+
+[^assumption-nat]: In this part we're basically assume $\mathbb{N}$ exists already. There are axioms that we can use where $\mathbb{N}$ does not exist, and we can construct it.
