@@ -40,10 +40,13 @@ Furthermore, if $\lvert A \rvert \leq \lvert B \rvert$, and $\lvert B \rvert \le
 >
 >So at least in the current formalisation: We can only compare set sizes, and we can only argue set cardinalities relatively between $A$ and $B$. We cannot say $\lvert A \rvert = n$ for some $n \in \mathbb{N}$.
 
-> **But wait. If there is a bijection $h : A \to B$, can't we also say $\lvert A \rvert = \lvert B \rvert$?** Yes. Yes you can.
+> **But wait. If there is a bijection $h : A \to B$, can't we also say $\lvert A \rvert = \lvert B \rvert$?** 
+
+Yes. Yes you can.
 
 > **...So you're telling me, if I have $f : A \to B$, and $g : B \to A$ both injective functions, then there exists a bijection $h : A \to B$?**
-> Yes! This is called the [Cantor-Schroder-Bernstein theorem](https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem).
+
+Yes! This is called the [Cantor-Schroder-Bernstein theorem](https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem).
 
 > [!Theorem]
 > If there exists injective functions $f : A \to B$, $g : B \to A$ between sets $A, B$. Then there exists bijective function $h : A \to B$.
@@ -59,11 +62,11 @@ Furthermore, if $\lvert A \rvert \leq \lvert B \rvert$, and $\lvert B \rvert \le
 ## Using functions to talk about set cardinalities
 
 ### Finite Sets
-So the first thing we should do is talk about finiteness. Now we can be formal. From this point on, we will use $\mathbb{Z}_n$ as a **shorthand (this is not standard notation)** to denote the set $\{1, 2, 3, \ldots, n\} = \{x : x \in \mathbb{Z} \land x \geq 1 \land x \leq n\}$. [^assumption-nat]
+So the first thing we should do is talk about finiteness. Now we can be formal. From this point on, we will use $\mathbb{Z}_n$ as a **shorthand (this is not standard notation)** to denote the set $\{1, 2, 3, \ldots, n\} = \{x : x \in \mathbb{Z} \land x \geq 1 \land x \leq n\}$. Also, $\mathbb{Z}_0$ is defined to be $\varnothing$. [^assumption-nat]
 
 Then, we will say a set $A$ is finite if:
-1. $A$ is the empty set.
-2. There exists an $n \in \mathbb{Z}$ and a bijection function $f : A \to \mathbb{Z}_n$.
+
+There exists an $n \in \mathbb{N}$ and a bijection function $f : A \to \mathbb{Z}_n$.
 
 Intuitively, a finite set either has 0 elements, or it has $n$ elements for some $n \in \mathbb{Z}$. The function $f$ here is basically just telling you how to show it has $n$ elements by literally saying: "This is element 1... this is element 2..." and so on.
 ## Infinite Sets
@@ -71,9 +74,129 @@ Okay let's move onto infinite sets because here's where things get very interest
 So cardinality gets a bit weirder when infinite sets are a thing. For example, $\lvert \mathbb{N}\rvert = \lvert \mathbb{Z} \rvert = \lvert \mathbb{Q} \rvert$.
 In fact, let $O = \{2x + 1 : x \in \mathbb{N}\}$. We can also say $\lvert O \rvert = \lvert \mathbb{N} \rvert$. That seems weird, clearly there are more natural numbers than odd numbers. And perhaps you can say that. That's why we say: the cardinalities are the same. Cardinalities are our way of talking about "size" between sets.
 
+> [!Technique]
+> Let's begin with the fundamental techinque of proving statements like:
+> 1. $\lvert A \rvert \leq \lvert B \rvert$
+> 2. $\lvert A \rvert = \lvert B \rvert$
+> 
+> To prove $|A| \leq |B|$, you can give an injection $f : A \to B$.
+> To prove $|A| = |B|$, you can either give an injection $f : A \to B$ and another injection $g : B \to A$;
+> Or give a bijection $f : A \to B$.
+> 
+> There's actually another technique that I do not think they have mentioned in CS1231S but in mathematically
+> speaking, you can give an injection $f : A \to B$ and a surjection $g : A \to B$ to also show $\lvert A \rvert = \lvert B \rvert$. 
+>
+> Two things to note: 
+>
+> When there exists a surjection $g : A \to B$, you're proving $\lvert A \rvert \geq \lvert B \rvert$. Does this mean you're proving that there exists an injection $h$ from $B \to A$? Yes!
+>
+> Just because there is an injection $f : A \to B$, and surjection $g : A \to B$ does not mean $f$ is a surjection, and it does not mean $g$ is a surjection. What it means is that if you prove $f, g$ exist, then there exists a bijection $h: A \to B$.
+> 
+> To summarise, the following are equivalent:
+> 1. $A \leq B$
+> 2. $\exists f : A \to B$ such that $f$ is injective.
+> 3. $\exists f : B \to A$ such that $f$ is surjective.
+>
+> Also, these follow are equivalent:
+> 1. $A = B$
+> 2. $A \leq B \land B \leq A$
+> 3. $\exists f : A \to B$ such that $f$ is bijective.
+> 4. $\exists f_1 : A \to B$ and $f_2 : A \to B$, such that $f_1$ is injective, and $f_2$ is surjective.
+> 5. $\exists f_1 : A \to B$ and $f_2 : B \to A$, such that $f_1, f_2$ are both injective.
+> 
+> Lastly, these are equivalent:
+> 1. Exists an injective function $f : A \to B$
+> 2. Exists a surjective function $B : B \to A$
+
+Now that we've mentioned some properties about set cardinalities, the other thing to mention is that you can prove the following:
+
+> [!Theorem]
+> Let $A$, $B$, be sets. Define $A R B$ if and only if $\lvert A \rvert \leq \lvert B \rvert$.
+> Then $R$ is a total order.
+> **Side note:** It's actually a well-order but let's not get into it. 
+
+For the remainder of this subsection, let's demonstrate some of these to show some of the equalities.
+And for fun, we'll prove some of the equivalences. The proofs will be quite long but they're collapsible.
+
+> [!Theorem]
+> $\lvert \mathbb{N} \rvert = \lvert \mathbb{Z} \rvert$
+
+> [!Proof]-
+> So we'll do this by giving the bijective function itself.
+> Consider $f : \mathbb{N} \to \mathbb{Z}$, where $f : x \mapsto (-1)^x (\frac{n}{2} + \frac{1}{4}) - \frac{1}{4}$
+> We now need to show that $f$ is bijective. We are going to employ the help of this lemma:
+> > [!Lemma] **Claim: $f(n)$ is negative if and only if $n$ is odd.**
+> > 1. Let $n \in \mathbb{N}$ be odd. I.e. $\exists t \in\mathbb{N} = 2\cdot t + 1$.
+> > 2. Then $(-1)^{n} = (-1)^{2t+1} = (-1)^{2t}(-1) = (-1)$
+> > 3. Then $(-1)^{n}\left(\frac{n}{2} + \frac{1}{4}\right) - \frac{1}{4} = (-1)\left(\frac{2t+1}{2} + \frac{1}{4}\right) - \frac{1}{4}$
+> > 4. $(-1)\left(\frac{2t+1}{2} + \frac{1}{4}\right) - \frac{1}{4} = (-1)(t + \frac{3}{4}) - \frac{1}{4}$
+> > 5. $(-1)(t + \frac{3}{4}) - \frac{1}{4} = - t - 1$.
+> > 6. Since $t \in \mathbb{N}, f(n) < 0$.
+> > 7. Let $n \in \mathbb{N}$ be even. I.e. $\exists t \in\mathbb{N} = 2\cdot t$.
+> > 8. $(-1)^{2t} = 1$.
+> > 9. $(-1)^{n}\left(\frac{n}{2} + \frac{1}{4}\right) - \frac{1}{4} = \left(t  + \frac{1}{4}\right) - \frac{1}{4}$
+> > 10. $\left(t  + \frac{1}{4}\right) - \frac{1}{4} = t$
+> > 11. Since $t \in \mathbb{N}$, $f(n) = t \geq 0$.
+> > 12. By lines 6. and 10. $f(n)$ is negative if and only if $n$ is odd.
+>
+> > [!Proof]
+> > **Claim: The given $f$ is surjective.**
+> >
+> > Remark: The tricky part about this one is that when we take an arbitrary $y$ as output of $f$, we don't yet know how to argue whether $n$ is even or odd. So we begin with this first:
+> > 
+> > Now we can try to prove surjectivity.
+> > 1. Let $y \in \mathbb{Z}$ be arbitrarily chosen.
+> > 2. Either $y \geq 0$ or $y < 0$.
+> > 3. Case 1: $y \geq 0$
+> > 	1. Then consider $n = 2y$.
+> > 	2. Since $f(n) = (-1)^{n}\left(\frac{n}{2} + \frac{1}{4}\right) - \frac{1}{4}$
+> > 	3. $(-1)^{n}\left(\frac{n}{2} + \frac{1}{4}\right) - \frac{1}{4} = \left(y + \frac{1}{4}\right) - \frac{1}{4}$
+> > 	4. $\left(y + \frac{1}{4}\right) - \frac{1}{4} = y$
+> > 	6. Also since $2y = n$, $n \in \mathbb{N}$, by closure of $\times$ on $\mathbb{N}$.
+> > 	7. Therefore $\exists n \in \mathbb{N} [f(n) = y]$
+> > 4. Case 2: $y < 0$
+> > 	1. Then consider $n=-2y-1$.
+> > 	2. $f(n) = (-1)^{n}\left(\frac{n}{2} + \frac{1}{4}\right) - \frac{1}{4}$
+> > 	3. $(-1)^{n}\left(\frac{n}{2} + \frac{1}{4}\right) - \frac{1}{4} = (-1)\left(\frac{-2y-1}{2} + \frac{1}{4}\right) - \frac{1}{4}$
+> > 	4. $(-1)\left(\frac{-2y-1}{2} + \frac{1}{4}\right) - \frac{1}{4}=(-1)(-y-\frac{1}{4}) - frac{1}{4}$
+> > 	5. $(-1)(-y-\frac{1}{4}) - frac{1}{4}=y$
+> > 	6. Also since $y < 0$, $2y < 1$, and $-2y \geq 1$, and $-2y - 1\geq 0$.
+> > 	7. So $n \geq 0$.
+> > 	8. Also by closure of multiplication and subtraction/addition, $n \in \mathbb{Z}$.
+> > 	9. Therefore $n \in \mathbb{N}$.
+> > 	10. Therefore $\exists n \in \mathbb{N} [f(n) = y]$
+> > 5. In all cases it is shown that $\exists n \in \mathbb{N} [f(n) = y]$.
+> > 6. By universal generalisation, $\forall y \in \mathbb{Z}, \exists n \in \mathbb{N} [f(n) = y]$.
+> 
+> Now we move to prove $f$ is injective.
+> 
+> >[!Proof]
+> > **Claim: The given $f$ is injective.**
+> > 
+> > 1. Let $x_1, x_2 \in \mathbb{N}$ arbitrarily chosen. Further assume $f(x_1) = f(x_2)$.
+> > 2. Now, by the Lemma, either both $x_1, x_2$ are even, or $x_1, $x_2$ are odd.
+> > 3. Case 1: Both $x_1, x_2$ are even.
+> > 	1. Now $(-1)^{x_1} = 1 = (-1)^{x_2}$.
+> > 	2. By the assumption, $(-1)^{x_1}\left( \frac{x_1}{2} + \frac{1}{4} \right) - \frac{1}{4} = (-1)^{x_2}\left( \frac{x_2}{2} + \frac{1}{4} \right) - \frac{1}{4}$
+> > 	3. Then by line 3.1 and basic algebra: $x_1 = x_2$.
+> > 4. Case 2: Both $x_1, x_2$ are odd.
+> > 	5. Now $(-1)^{x_1} = -1 = (-1)^{x_2}$.
+> > 	6. By the assumption, $(-1)^{x_1}\left( \frac{x_1}{2} + \frac{1}{4} \right) - \frac{1}{4} = (-1)^{x_2}\left( \frac{x_2}{2} + \frac{1}{4} \right) - \frac{1}{4}$
+> > 	7. Then by line 3.1 and basic algebra: $x_1 = x_2$.
+> > 5. In all cases it is shown that $x_1 = x_2$.
+> > 6. By universal generalisation, $\forall x_1, x_2 \in \mathbb{N}[f(x_1) = f(x_2) \to x_1 = x_2]$.
+
+
+> [!Theorem]
+> $\lvert \mathbb{N} \rvert = \lvert \mathbb{N} \times \mathbb{N} \rvert$
+
+> [!Theorem]
+> $\lvert \mathbb{N} \rvert = \lvert \mathbb{Q} \rvert$
+
+
 > [!Note] 
 > A few things to note:
-> 1. Yes, for finite sets $A, B$, if $A$ is a proper subset of $B$, then ($\lvert A \rvert \leq \lvert B \rvert$ and $\lvert A \rvert \neq \lvert B \rvert$).
+> 1. Yes, for **finite sets** $A, B$, if $A$ is a proper subset of $B$, then ($\lvert A \rvert \leq \lvert B \rvert$ and $\lvert A \rvert \neq \lvert B \rvert$).
 > 2. A set that has a bijection to $\mathbb{N}$ is called **countably infinite**.
 > 3. No, for infinite sets, it is not necessarily the case that if $A$ is a proper subset of $B$, then $\lvert A \lvert \leq \lvert B \rvert$ and also $\lvert A \rvert \neq \lvert B \rvert$. Case in point: $\lvert \mathbb{N} \setminus \{0\} \rvert = \lvert \mathbb{N} \rvert$.
 
