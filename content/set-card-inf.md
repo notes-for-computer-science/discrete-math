@@ -23,6 +23,9 @@ So let's talk about how to formalise these things and study not just counting th
 > 
 > In fact, as newcomers (or not) to programming, you might wonder: Can my compiler/runtime environment ever look at my code and tell me it will loop forever, and then I can go fix it. The answer is **nope**. To be clear, it might be able to spot certain patterns and warn you, but there isn't a perfect algorithm that has 100% accuracy on this. We'll see this at the end of the notes.
 
+>[!Disclaimer]
+> The following notes are not meant to be a formal foray into set theory and the cardinals. So we will be glossing over a lot of details (for convenience) and taking a lot of very hardcore theorems for granted.
+> So to be clear we're restricting ourselves to certain statements we want to make. And the focus of these notes is to just give intuition on higher level ideas about stuff between sets.
 
 ## Let's begin!
 Our starting point is picking up where we let off with functions. So recall:
@@ -49,7 +52,7 @@ Yes. Yes you can.
 Yes! This is called the [Cantor-Schroder-Bernstein theorem](https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem).
 
 > [!Theorem]
-> If there exists injective functions $f : A \to B$, $g : B \to A$ between sets $A, B$. Then there exists bijective function $h : A \to B$.
+> (Cantor-Schoder-Bernstein) If there exists injective functions $f : A \to B$, $g : B \to A$ between sets $A, B$. Then there exists bijective function $h : A \to B$.
 
 >[!Quiz]+ 
 > Notice that the theorem statements says if injective $f, g$ exists, then bijective $h$ exists. What about the other direction? If $h : A \to B$ is bijective, can we find injective functions $f : A \to B$ and $g : B \to A$?
@@ -57,18 +60,16 @@ Yes! This is called the [Cantor-Schroder-Bernstein theorem](https://en.wikipedia
 > > 
 > > Yes. Assume $g : A \to B$ bijective. Then $f = g$ is an injective function from $A \to B$. Also $f^{-1}$ is an injective function from $B \to A$. Check it!
 
-
-
 ## Using functions to talk about set cardinalities
 
 ### Finite Sets
-So the first thing we should do is talk about finiteness. Now we can be formal. From this point on, we will use $\mathbb{Z}_n$ as a **shorthand (this is not standard notation)** to denote the set $\{1, 2, 3, \ldots, n\} = \{x : x \in \mathbb{Z} \land x \geq 1 \land x \leq n\}$. Also, $\mathbb{Z}_0$ is defined to be $\varnothing$. [^assumption-nat]
+So the first thing we should do is talk about finiteness. Now we can be (slightly more) formal. From this point on, we will use $\mathbb{Z}_n$ as a **shorthand (this is not standard notation)** to denote the set $\{1, 2, 3, \ldots, n\} = \{x : x \in \mathbb{Z} \land x \geq 1 \land x \leq n\}$. Also, $\mathbb{Z}_0$ is defined to be $\varnothing$. [^assumption-nat]
 
 Then, we will say a set $A$ is finite if:
 
 There exists an $n \in \mathbb{N}$ and a bijection function $f : A \to \mathbb{Z}_n$.
 
-Intuitively, a finite set either has 0 elements, or it has $n$ elements for some $n \in \mathbb{Z}$. The function $f$ here is basically just telling you how to show it has $n$ elements by literally saying: "This is element 1... this is element 2..." and so on.
+Intuitively, a finite set either has 0 elements, or it has $n$ elements for some $n \in \mathbb{Z}^+$. The function $f$ here is basically just telling you how to show it has $n$ elements by literally saying: "This is element 1... this is element 2..." and so on.
 ## Infinite Sets
 Okay let's move onto infinite sets because here's where things get very interesting.
 So cardinality gets a bit weirder when infinite sets are a thing. For example, $\lvert \mathbb{N}\rvert = \lvert \mathbb{Z} \rvert = \lvert \mathbb{Q} \rvert$.
@@ -114,6 +115,10 @@ Now that we've mentioned some properties about set cardinalities, the other thin
 > Let $A$, $B$, be sets. Define $A R B$ if and only if $\lvert A \rvert \leq \lvert B \rvert$.
 > Then $R$ is a total order.
 > **Side note:** It's actually a well-order but let's not get into it. 
+> 
+> Remark: To actually prove that it's a total order, there's actually a bunch of theorems you're getting for free. The Cantor-Scroder-Bernstein theorem (gives you that $\lvert A \rvert \leq \lvert B \rvert \land \lvert B \rvert \leq \lvert A \rvert \to \lvert A \rvert = \lvert B \rvert$), and stuff like any two cardinal numbers are such that there exists either an injection from the first to the second or the other way around.
+
+
 
 For the remainder of this subsection, let's demonstrate some of these to show some of the equalities.
 And for fun, we'll prove some of the equivalences. The proofs will be quite long but they're collapsible.
