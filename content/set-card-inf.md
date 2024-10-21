@@ -108,7 +108,14 @@ In fact, let $O = \{2x + 1 : x \in \mathbb{N}\}$. We can also say $\lvert O \rve
 > 1. Exists an injective function $f : A \to B$
 > 2. Exists a surjective function $B : B \to A$
 
-Before we move on, we need to talk about an important concept: **countability**.
+> [!Technique]
+> Another technique given in CS1231S that was not made entirely explicit is the following:
+> To show $\lvert A \rvert \leq \lvert\mathbb{N}\rvert$, one can give a surjective function $g : \mathbb{N} \to A$.
+> 
+> They've stated in in the form of sequences, but $g$ is basically giving you your sequence here.
+> 
+> Why is this simpler? Because now instead of giving a bijection, you only have to give a surjection.
+
 
 For the remainder of this subsection, let's demonstrate some of these to show some of the equalities.
 And for fun, we'll prove some of the equivalences. The proofs will be quite long so I've made them collapsible.
@@ -192,86 +199,177 @@ And for fun, we'll prove some of the equivalences. The proofs will be quite long
 > [!Theorem]
 > $\lvert \mathbb{N} \times \mathbb{N} \rvert = \lvert \mathbb{N} \rvert$
 
-This is one of the more useful statements. Here's 
+This is one of the more useful statements. We will use what is called [Cantor's Pairing Function](https://en.wikipedia.org/wiki/Pairing_function) Here's a proof:
 
 > [!Proof]-
-> 1. Consider function $f : (i, j) \mapsto \frac{(i + j)(i + j + 1)}{2} + j$.
-> We first show that $f$ is surjective.
-> 2. Let $n \in \mathbb{N}$, arbitrarily chosen.
->   1. Consider $i = $
->
-
-> [!Theorem]
-> $\lvert \mathbb{N} \rvert = \lvert \mathbb{Q} \rvert$
-
-
-> [!Note] 
-> A few things to note:
-> 1. Yes, for **finite sets** $A, B$, if $A$ is a proper subset of $B$, then ($\lvert A \rvert \leq \lvert B \rvert$ and $\lvert A \rvert \neq \lvert B \rvert$).
-> 2. A set that has a bijection to $\mathbb{N}$ is called **countably infinite**.
-> 3. No, for infinite sets, it is not necessarily the case that if $A$ is a proper subset of $B$, then $\lvert A \lvert \leq \lvert B \rvert$ and also $\lvert A \rvert \neq \lvert B \rvert$. Case in point: $\lvert \mathbb{N} \setminus \{0\} \rvert = \lvert \mathbb{N} \rvert$.
-
-## Cardinal numbers
-Okay let me elaborate a little more on **cardinal numbers**. We've talked about what finite, and countably finite means, and this is a good point to start reflecting on this and ironing out a few kinks.
-
-For example, throughout the course we've been saying things like $\lvert A \times B \rvert = \lvert A \rvert \times \lvert B \rvert$. But as of right now, the $\lvert A \rvert$ we have defined, does not output a number. We have only said what $\lvert A \rvert \leq \lvert B \rvert$ means, but nothing else! So what does $\lvert A \rvert \times \lvert B \rvert$ mean?
-
-So we now need a new set of objects to play with. These happen to be called **cardinal numbers**. You'll want to think of $\lvert A \rvert$ as something that takes the set $A$, and it gives you a cardinal number. If $A$ is finite, it will give you $n \in \mathbb{N}$ such that there exists a bijection from $A$ to $\{1, 2, \ldots, n\}$.
-
-What about infinite sets? What is $\lvert \mathbb{N} \rvert$? Well that happens to give you $\aleph_0$. This is **first trans-finite cardinal number**. Some people will call this the "smallest infinite cardinal number". I.e. any smaller and you're back in finite land. Bear in mind, cardinal numbers are also sets. Yes including stuff like 0, 1, 2.
-
-> [!An aside: Cardinals as sets]-
-> If you want to stick to only fundamentals, it's possible to construct cardinals (and also numbers) out of just a few axioms (think of these as unproven but philosophically accepted truths). I will state them very informally here. If you want to know more, you can take MA3205 or learn set theory formally.
->    1. The empty set exists.
->    2. You can take two sets and union them.
->    3. You can take two sets and pair them.
->    4. There is an infinite set. (We don't know if it's countable or uncountable)
->    5. Two sets are the same if and only if they have the same elements.
->    6. We can specify sets directly. (this is a **vast** oversimplification but anyway..)
->    
->    Just take my word for it, you can use these to show that no set is an element of itself. Now, we can create the natural numbers. Define $c$ to be a function that takes a set $x$ and outputs $x \cup \{x\}$.  Then let's think about the following set:
->    
->    1. $\varnothing \in S$.
->    2. $s \in S \to c(s) \in S$
->     
->    Let's take a look at a few values. $\varnothing$ is in $S$. 
->    Also, $c(\varnothing) = \{\varnothing\}$ is in $S$. 
->    If we apply $c$ again, $\big\{ \varnothing, \{\varnothing\} \big\}$ is in $S$. 
->    If we apply $c$ yet again, $\Big\{ \big\{ \varnothing, \{\varnothing\} \big\}, \varnothing, \{\varnothing\} \Big\}$ is in $S$.
->    
->    Do you see the pattern? How many elements are there in $\varnothing$? 
->    How many elements are there in $c(\varnothing)$? 
->    How many elements are there in $c(c(\varnothing))$? 
->    How about $c(c(c(\varnothing)))$?
->    
->    If we treat $\varnothing$ as $0$. 
->    What should we treat $c(\varnothing)$ as? 
->    What about $c(c(\varnothing))$? 
->    What about $c(c(c(\varnothing)))$?
->    
->    Since $S$ contains all these sets, what should we treat $S$ as?
-
-
-
-So let's revisit what I said about bijections. $A$ is countably infinite if and only if it has a bijection $f : A \to \mathbb{N}$. Since $\mathbb{N}$ has cardinality $\aleph_0$, this means there exists $g : \mathbb{N} \to \aleph_0$ which is also a bijection. **Oh look**, this means we have a bijection $h : A \to \aleph_0$ (if and only if, in fact).
-
-So to be more precise, $A$ is countably infinite if $A$ has a bijection to $\aleph_0$.
-
-To be clear, mathematicians have taken great care to also define things like "multiplication" and "addition" of cardinals so that we can actually formally prove things like $\lvert A \times B \rvert = \lvert A \rvert \times \lvert B \rvert$, and $\lvert A \cup B\rvert \leq \lvert A \rvert + \lvert B \rvert$. But we won't go into that here. I just need you to appreciate that even fundamental things like this can be proven. Isn't that crazy?
+> 
+> Here's a picture that sort of illustrates the what the below function is doing:
+> 
+> ![[diagonal-bijection.png]]
+> 
+> Let's think about it this way, we're making triangles. How do I make a $n$-tall, and $n$-wide triangle? What's the size? It's actually the $n^{th}$ triangle number $(n)(n+1)/2$. Try it!
+> 
+> One more thing, given $(i, j)$, we can actually see that it falls on the $(i + j)^{th}$ diagonal. We are going to refer to the $d = i + j$. So the $d^{th}$ diagonal contains all pairs $(i, j)$ such that $i + j = d$.
+> 
+> ![[diagonal-bijection-change-coord 1.png|350]]
+> 
+> Combine the two ideas we had, and you can see that basically on the $d^{th}$ diagonal starts with the $d^{th}$ triangle number. Furthermore, the $d^{th}$ diagonal actually has $d+1$ elements on its diagonal. So what numbers are on the $d^{th}$ diagonal?
+> 
+> Any number of the form $d(d+1)/2 + t$, for any $0 \leq t \leq d$ (there are in total $d+1$ such numbers).  
+> 
+> Okay we are in place to begin the proof. Here's the intuition. Given $(i, j)$, we map it to the $d^{th}$ diagonal (where $i + j = d$, and its offset into the diagonal is $j$. 
+> Consider function $f : (i, j) \mapsto \frac{(i + j)(i + j + 1)}{2} + j$.
+> 
+> We first show that $f$ is surjective. The idea is the following: We first find the largest triangle number that is at most $n$, then use that to figure out which diagonal $n$ sits on, then figure out what $n$'s offset is on that diagonal.
+> 1. Let $n \in \mathbb{N}$, arbitrarily chosen.
+> 2. Let $t$ be the largest natural number such that $t(t+1)/2 \leq n$.
+> 3. We first claim that $n \leq t(t+1)/2 + t$.
+> 	1. Suppose not. Then $n > t(t+1)/2 + (t + 1) - 1 = \frac{t(t+1) + 2(t+1)}{2} - 1 = \frac{(t+1)(t+2)}{2} - 1$.
+> 	2. Then we obtain a contradiction because now $t+1 > t$, and $n \geq \frac{(t+1)(t+2)}{2}$.
+> 4.  Now consider $j = n - t(t+1)/2$. Since $n \leq t(t+1)/2 + t$, $j \leq t$.
+> 5.  Also since $n \geq t(t+1)/2$, $j = n - t(t+1)/2 \geq 0$.
+> 6.  Now let $i = t - j$. Since $j \leq t$, $i \geq 0$.
+> 7.  Now both $i, j \in \mathbb{N}$, since $t \in \mathbb{N}$.
+> 8.  Now 
+> $$\begin{align}
+> f(i, j) &= \frac{(i+j+1)(i+j)}{2} + j\\
+> 		&= \frac{(t+1)(t)}{2} + n - \frac{t(t+1)}{2}\\
+> 		&= n
+> \end{align}$$
+> 9. Therefore, $\forall n \in \mathbb{N}, \exists i, j \in \mathbb{N} [f(i, j) = n]$.
+>  Remark: To be clear, in case the argument looks circular, the important idea is the following: when we are given $n$, we need to figure out which diagonal it's on. To do this, we needed to find the largest triangle number that is less than or equals to $n$. Let that be the $t^{th}$ triangle number. Then we know $n$ was due to some $i, j$ such that $i + j$ is $t$. Then, to figure out $j$, we know $n$ is exactly $j$ away from $t(t+1)/2$. So $j = n - t(t+1)/2$. We then had to check that $i$ and $j$ were natural numbers. I.e. $\geq 0$, and I skipped a few steps on closure. E.g. $t(t+1)/2$ is a natural number. But that's the idea.
+>  
+>  Next, we show that $f$ is injective. To do this, we again use the fact that we can compare two outputs using which diagonal they are sitting on. If it's different, they we know they're already different. If they're the same, then their offsets into the diagonal must be different.
+>  To do this, we will actually prove the contrapositive statement. 
+>  
+>  1. Let $(i_1, j_1), (i_2, j_2) \in \mathbb{N} \times \mathbb{N}$. Further assume that $(i_1, j_1) \neq (i_2, j_2)$.
+>  2. Either $i_1 + j_1 = i_2 + j_2$, or $i_1 + j_1 \neq i_2 + j_2$.
+>  3. Case 1: $i_1 + j_1 = i_2 + j_2$
+> 	 1. Letting $i_2 + j_2 = d = i_1 + j_1$:
+> 	 2. Assume that $j_1 = j_2$.
+> 		 1. Then $i_2 = d - j_2 = d - j_1 = i_1$.
+> 		 2. Then $j_1 = j_2$ and $i_1 = i_2$. Contradiction against line 1.
+> 	 3. Therefore $j_1 \neq j_2$
+> 	 4. $$\begin{align}
+> 		f(i_1, j_1) &= (d)(d+1)/2 + j_1\\
+> 					&\neq (d)(d+1)/2 + j_2\\
+> 					&= f(i_2, j_2)
+> 		\end{align}$$
+>  4. Therefore, $\forall (i_1, j_1), (i_2, j_2) \in \mathbb{N}\times \mathbb{N}[(i_1, j_1) \neq (i_2, j_2) \to f(i_1, j_1) \neq f(i_2, j_2) ]$
+>  5. $f$ is injective (Contrapositivity of line 4).
 
 ## Within Countable Infinity
-There are a few useful facts (provable theorems, in fact) that you should know. Let's reiterate some that we had mentioned before:
+
+It turns out we have a name for the "size" or cardinality of $\mathbb{N}$. We call it $\aleph_0$ (pronounced "aleph null"). This is the **first** transfinite cardinal number. Think of cardinal numbers as "numbers" that represent the size of sets. So we write $\lvert \mathbb{N} \rvert = \aleph_0$.
+
+>[!Definition]
+>We will say a set $A$ is **countably infinite** if $A$ has a bijection to $\mathbb{N}$.
+>
+>Furthermore, we will say a set $A$ is **countable** if either:
+> 1. $A$ is finite; Or
+> 2. $A$ is countably infinite.
+> 
+> It's important to note the difference between **countable** and **countably infinite**.
+>    
+
+That said, there is a different formulation that I've previously mentioned. Basically:
+
+>[!Remark]
+> A set $A$ is **countable** if there exists a surjective function $f : \mathbb{N} \to A$.
+> 
+> The CS1231S treatment is via sequences. But such a function $f$ that is surjective basically provides a sequence that satisfies [Lemma 9.2, Slide 34 of the CS1231S notes](https://www.comp.nus.edu.sg/~cs1231s/lect/24s1/Lecture09_Cardinality_full.pdf). 
+
+There are a few useful facts (provable theorems, in fact) that you should know. Let's list some out now:
 
 1. $\lvert \mathbb{N} \rvert = \lvert \mathbb{Z} \rvert = \lvert \mathbb{Q} \rvert = \aleph_0$
-2. If $A, B$ are countably infinite sets, then $\lvert A \times B \rvert = \lvert A \cup B \rvert = \aleph_0$.
-3. If $A, B$ are countable sets. Then $A \times B$ is countable. Also, $A \cup B$ is countable.
-4. If we have a **countably infinite set $\mathcal{C}$ of countably infinite sets**. Then:
-	1. We have a bijective function $f : \mathbb{N} \to \mathcal{C}$. (Why?) 
-	2. Think of $f(i)$ as outputting the $i^{th}$ set from $\mathcal{C}$. 
-	   Then the infinitely long union: $\bigcup_{i \in \mathbb{N}} f(i)$ is also countably infinite.
+2. Let $A \subseteq B$ where $B$ is countably infinite. Then $A$ is countable.
+3. If $A, B$ are countably infinite sets, then $\lvert A \times B \rvert = \lvert A \cup B \rvert = \aleph_0$.
+4. If $A, B$ are countable sets. Then $A \times B$ is countable. Also, $A \cup B$ is countable.
+5. Let $A_1, A_2, \ldots = (A_n)_{n \in \mathbb{Z}^+}$ be a sequence of countable sets. Define $\bigcup_{i = 1}^{\infty} A_i = \mathcal{A}$. Then $\mathcal{A}$ is countable.
 
-Remember the whole idea on how to do this is to give bijective functions.
-Lastly, since a countably infinite set $A$ has a bijection to $\aleph_0$, and $\mathbb{N}$ has a bijection to $\aleph_0$, we know there is a bijection $f$ from $\mathbb{N}$ to $A$. This means, we can write out the elements of $A$ in an infinitely long sequence like $a_0a_1a_2,\ldots$ In fact, $a_i = f(i)$. Since $f(i) \in \mathbb{A}$, and $f$ is bijective, it will list out all the elements of $A$ ($f$ is surjetive), and only once per element of $A$ ($f$ injective).
+>[!Theorem]+
+> The idea is to use the fact that we can make a surjection from $\mathbb{N}$ to $A$.
+> 1. Let $B$ be countably infinite, and $A$ be a subset of $B$. If $A$ is empty, we are done, since $A$ is finite, therefore countable.
+> 2. Therefore we now assume $A$ is non-empty.
+> 3. Since we know $A$ is non-empty, $\exists z \in A$.
+> 4. By line 1, we know that there exists a bijection $f : \mathbb{N} \to B$.
+> 5.  Now create function $g : \mathbb{N} \to A$, where:
+> $$
+> g : n \mapsto \begin{cases}
+> z &, \text{ if }f(n) \in B \setminus A\\
+> f(n)&, \text{ otherwise}
+> \end{cases}
+> $$
+> 6. Note that $g$ only maps to elements in $A$, since $f$ maps to $B \setminus A$ or $A$, and when it does, $g$ maps to $z \in A$. 
+> 7. Now let $a \in A$, arbitrarily chosen.
+> 8. Since $f$ was surjective on $B$, and $a \in B$ (because $A \subseteq B$), $\exists i \in \mathbb{N}$ such that $f(i) = a$.
+> 9. Since $f(i) \notin B \setminus A$, $g(i) = f(i) = a$.
+> 10. Therefore $\forall a \in A, \exists i \in \mathbb{N}[g(i) = a]$.
+> 11. Therefore $g : \mathbb{N} \to A$ is a surjection.
+>  12. Thus, $A$ is countable. 
+
+>[!Theorem]+
+> If $A, B$ are countably infinite sets, then $\lvert A \times B \rvert = \lvert A \cup B \rvert = \aleph_0$
+> 
+> Let $A, B$ be countably infinite. Then there exists bijections $f: \mathbb{N} \to A$, and $g : \mathbb{N} \to B$ such that $f, g$ bijective.
+> 
+> For $\lvert A \times B\rvert$, it suffices to show that $\lvert A \times B\rvert = \lvert \mathbb{N} \times \mathbb{N}\rvert$, since we know the latter has a bijection to $\lvert \mathbb{N}\rvert$.
+> 
+> Consider $h : \mathbb{N} \times \mathbb{N} \to A \times B$, where $h(i, j) \mapsto (f(i), g(j))$. We know that since $f(i) \in A, g(j) \in B$, $h(i, j) \in A \times B$.
+> 
+> 1. Let $(a, b) \in A \times B$, arbitrarily chosen.
+> 2. Now since $f$ is surjective, exists $i \in \mathbb{N}$ such that $f(i) = a$.
+> 3. Now since $g$ is surjective, exists $j \in \mathbb{N}$ such that $f(j) = a$.
+> 4. Therefore $h(i, j) = (f(i), g(j)) = (a, b)$.
+> 5. By universal generalisation $\forall (a, b) \in A \times B \exists i, j \in \mathbb{N} [h(i, j) = (a, b)]$.
+>    
+> For $\lvert A \cup B\rvert$, the idea is that we want to list out the elements in an alternating fashion. One element from $A$, then one from $B$, then one from $A$, then one from $B$, then one from...
+> The tricky thing here is that they might not be disjoint. So a little annoyingly, we want to actually do this thing where we make 3 sets: $A \cap B$, $A \setminus B$, and $B \setminus A$.
+> 
+> Again, since $A, B$ are both countably infinite, we know that  there exists bijections $f: \mathbb{N} \to A$, and $g : \mathbb{N} \to B$ such that $f, g$ bijective.
+> Consider $h : \mathbb{N} \to A \cup B$, $h : n \mapsto \begin{cases} f(i), \exists i \in \mathbb{N} [n = 2i] \\ g(i), \exists i \in \mathbb{N} [n = 2i + 1] \end{cases}$
+> 
+> We need to show $h$ is a function to begin with. After all, what happens if a single $n$ lands in both cases? What about if it's in a single case but there are $i \neq i'$ such that $n$ somehow is related to both $i$? We know it won't happen, but we should formally prove it.
+> 
+> **Claim 1: $h$ is well-defined**.
+> 1. Let $n \in \mathbb{N}$, then $n$ either even or odd.
+> 2. Case 1: $n$ is even.
+> 	1. Then $\exists i \in \mathbb{N} [n = 2i]$.
+> 	2. Assume for a contradiction that $\exists i' \in \mathbb{N} [i' \neq i \land n = 2i']$.
+> 	2. Then $2i' = n = 2i$.
+> 	3. Thus $i' = i$. But that contradicts our assumption on $i'$.
+> 	4. Therefore $i$ is unique. 
+> 	5. Since $f$ is a well-defined function, there exists a unique $a \in A$ such that $f(i) = a$.
+> 	6. Since $i$ is unique, there exists a unique value $a \in A$ such that $h(n) = f(i) = a$.
+> 	7. Therefore $h$ is well-defined.
+> 3. Case 2: $n$ is odd.
+> 	1. Then $\exists i \in \mathbb{N} [n = 2i+1]$.
+> 	2. Assume for a contradiction that $\exists i' \in \mathbb{N} [i' \neq i \land n = 2i' + 1]$.
+> 	3. Then $2i' + 1 = n = 2i + 1$.
+> 	4. Thus $i' = i$. But that contradicts our assumption on $i'$.
+> 	5. Therefore $i$ is unique. 
+> 	6. Since $g$ is a well-defined function, there exists a unique $b \in B$ such that $g(i) = b$.
+> 	7. Since $i$ is unique, there exists a unique value $b \in B$ such that $h(n) = g(i) = b$.
+> 	8. Therefore $h$ is well-defined.
+> 4. In both cases, it is shown that $h$ is well defined.
+>    
+> Okay, now that we've done that, we next move to show that $h$ is bijective.
+> 
+> 1. Let $x \in A \cup B$ be arbitrarily chosen.
+> 2. Now either $x \in A$ or $x \in B$.
+> 3. Case 1: $x \in A$
+> 	1. Then by surjectivity of $f : \mathbb{N} \to A$, we know that $\exists i \in \mathbb{N}$ such that $f(i) = x$.
+> 	2. Now consider input $n = 2i$.
+> 	3. Since $h(n) = h(2i) = f(i) = x$.
+> 4. Case 2: $x \in B$
+> 	1. Then by surjectivity of $g : \mathbb{N} \to B$, we know that $\exists i \in \mathbb{N}$ such that $f(i) = x$.
+> 	2. Now consider input $n = 2i + 1$.
+> 	3. Since $h(n) = h(2i + 1) = f(i) = x$.
+> 5. In all cases, it is shown that $\exists i \in \mathbb{N} [h(i) = x]$.
+> 6. By universal generalisation $\forall x \in (A \cup B), \exists i \in \mathbb{N} [h(i) = x]$.
+>    
+>    
+
 
 ## Moving out of Countably Infinite
 
