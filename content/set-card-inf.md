@@ -71,24 +71,23 @@ There exists an $n \in \mathbb{N}$ and a bijection function $f : A \to \mathbb{Z
 
 Intuitively, a finite set either has 0 elements, or it has $n$ elements for some $n \in \mathbb{Z}^+$. The function $f$ here is basically just telling you how to show it has $n$ elements by literally saying: "This is element 1... this is element 2..." and so on.
 ## Infinite Sets
-Okay let's move onto infinite sets because here's where things get very interesting.
+
+### Countably Infinite Sets
+Okay let's move onto infinite sets because here's where things get very interesting. And we'll talk about the "smallest" infinity: Countable infinity.
 So cardinality gets a bit weirder when infinite sets are a thing. For example, $\lvert \mathbb{N}\rvert = \lvert \mathbb{Z} \rvert = \lvert \mathbb{Q} \rvert$.
 In fact, let $O = \{2x + 1 : x \in \mathbb{N}\}$. We can also say $\lvert O \rvert = \lvert \mathbb{N} \rvert$. That seems weird, clearly there are more natural numbers than odd numbers. And perhaps you can say that. That's why we say: the cardinalities are the same. Cardinalities are our way of talking about "size" between sets.
 
 > [!Technique]
 > Let's begin with the fundamental techinque of proving statements like:
-> 1. $\lvert A \rvert \leq \lvert B \rvert$
-> 2. $\lvert A \rvert = \lvert B \rvert$
+> $$\lvert A \rvert = \lvert B \rvert$$
 > 
-> To prove $|A| \leq |B|$, you can give an injection $f : A \to B$.
-> To prove $|A| = |B|$, you can either give an injection $f : A \to B$ and another injection $g : B \to A$;
-> Or give a bijection $f : A \to B$.
+> To prove $|A| = |B|$, in CS1231S, you need to give a bijection $f : A \to B$.
+> Outside of CS1231S, there are other methods:
+> 1. Give an injective function $f : A \to B$, and an injective function $g : A \to B$; or
+> 2. Give an injective function $f : A \to B$, and a surjective function $g : A \to B$. 
 > 
-> There's actually another technique that I do not think they have mentioned in CS1231S but in mathematically
-> speaking, you can give an injection $f : A \to B$ and a surjection $g : A \to B$ to also show $\lvert A \rvert = \lvert B \rvert$. 
 >
-> Two things to note: 
->
+> Two things to note about the additional methods (in fact, in CS1231S, they've mentioned this holds for finite sets):
 > When there exists a surjection $g : A \to B$, you're proving $\lvert A \rvert \geq \lvert B \rvert$. Does this mean you're proving that there exists an injection $h$ from $B \to A$? Yes!
 >
 > Just because there is an injection $f : A \to B$, and surjection $g : A \to B$ does not mean $f$ is a surjection, and it does not mean $g$ is a surjection. What it means is that if you prove $f, g$ exist, then there exists a bijection $h: A \to B$.
@@ -109,19 +108,10 @@ In fact, let $O = \{2x + 1 : x \in \mathbb{N}\}$. We can also say $\lvert O \rve
 > 1. Exists an injective function $f : A \to B$
 > 2. Exists a surjective function $B : B \to A$
 
-Now that we've mentioned some properties about set cardinalities, the other thing to mention is that you can prove the following:
-
-> [!Theorem]
-> Let $A$, $B$, be sets. Define $A R B$ if and only if $\lvert A \rvert \leq \lvert B \rvert$.
-> Then $R$ is a total order.
-> **Side note:** It's actually a well-order but let's not get into it. 
-> 
-> Remark: To actually prove that it's a total order, there's actually a bunch of theorems you're getting for free. The Cantor-Scroder-Bernstein theorem (gives you that $\lvert A \rvert \leq \lvert B \rvert \land \lvert B \rvert \leq \lvert A \rvert \to \lvert A \rvert = \lvert B \rvert$), and stuff like any two cardinal numbers are such that there exists either an injection from the first to the second or the other way around.
-
-
+Before we move on, we need to talk about an important concept: **countability**.
 
 For the remainder of this subsection, let's demonstrate some of these to show some of the equalities.
-And for fun, we'll prove some of the equivalences. The proofs will be quite long but they're collapsible.
+And for fun, we'll prove some of the equivalences. The proofs will be quite long so I've made them collapsible.
 
 > [!Theorem]
 > $\lvert \mathbb{N} \rvert = \lvert \mathbb{Z} \rvert$
@@ -191,9 +181,25 @@ And for fun, we'll prove some of the equivalences. The proofs will be quite long
 > > 5. In all cases it is shown that $x_1 = x_2$.
 > > 6. By universal generalisation, $\forall x_1, x_2 \in \mathbb{N}[f(x_1) = f(x_2) \to x_1 = x_2]$.
 
+> [!Theorem]
+> $\lvert \mathbb{N} \rvert = \lvert \mathbb{Z}^+ \rvert$
+
+> [!Proof\-Idea]-
+> Consider function $f : \mathbb{N} \to \mathbb{Z}^+$ where $f : n \mapsto n + 1$.
+> This should be doable for the reader at this point, to show that this function is indeed a bijection.
+
 
 > [!Theorem]
-> $\lvert \mathbb{N} \rvert = \lvert \mathbb{N} \times \mathbb{N} \rvert$
+> $\lvert \mathbb{N} \times \mathbb{N} \rvert = \lvert \mathbb{N} \rvert$
+
+This is one of the more useful statements. Here's 
+
+> [!Proof]-
+> 1. Consider function $f : (i, j) \mapsto \frac{(i + j)(i + j + 1)}{2} + j$.
+> We first show that $f$ is surjective.
+> 2. Let $n \in \mathbb{N}$, arbitrarily chosen.
+>   1. Consider $i = $
+>
 
 > [!Theorem]
 > $\lvert \mathbb{N} \rvert = \lvert \mathbb{Q} \rvert$
