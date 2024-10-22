@@ -118,7 +118,9 @@ In fact, let $O = \{2x + 1 : x \in \mathbb{N}\}$. We can also say $\lvert O \rve
 
 
 For the remainder of this subsection, let's demonstrate some of these to show some of the equalities.
-And for fun, we'll prove some of the equivalences. The proofs will be quite long so I've made them collapsible.
+
+And for fun, we'll prove some of the equivalences. The proofs will be quite long but they're collapsible so hopefully the page isn't too large.
+
 
 > [!Theorem]
 > $\lvert \mathbb{N} \rvert = \lvert \mathbb{Z} \rvert$
