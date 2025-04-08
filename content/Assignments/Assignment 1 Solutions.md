@@ -1,0 +1,236 @@
+
+This is the first of two assignments and is worth 15% of the total grade. The assignment is due **Sunday 02nd March 2025, 2359**. Submit your solutions digitally on Canvas, a submission box will be open under "Assignments > Assignment 1".
+
+
+There are 5 questions for a total of 15 marks. There is also a **optional** bonus question that you **may** attempt, for 2 marks. The total earnable marks is 17 out of 15 marks. (Think of the bonus marks as potentially making up any minor mistakes you may have made in the other parts of this assignment.)
+
+_Please make sure your handwriting is legible. You may scan/take a picture of handwritten solutions, you may also type your solutions. We are not particular about the symbol use if you cannot type out the symbols but please make it clear to us what symbol you were intending to use._
+
+# How to submit:
+- Submit online on Canvas. There is a submission box on Canvas for you to submit your document. Either .docx, .pdf, or a picture of your written solutions are acceptable as long as we can read your attempts.
+* **Official due date for submission** : **Sunday 02nd March 2025, 2359**
+
+# Collaboration Policy: 
+* You may discuss high-level ideas with your classmates or friends. You should list your collaborators if you do so. 
+* **Do not share your solutions**.
+* ChatGPT (and other LLMs) are **not allowed**. 
+* Your submission **must be of your own write-up**.
+
+# Late Policy:
+* No late submissions for the assignment allowed.
+
+
+---
+# Question 1 (1 mark):
+
+Is $p \land (p \to q)$ logically equivalent to $p\land q$?
+
+| $p$     | $q$     | $p \land (p \to q)$ | $p \land q$ |
+| ------- | ------- | ------------------- | ----------- |
+| $true$  | $true$  |                     | $true$      |
+| $true$  | $false$ |                     | $false$     |
+| $false$ | $true$  |                     | $false$     |
+| $false$ | $false$ |                     | $false$     |
+
+Fill out the 4 remaining cells to check whether they are equivalent. You need not show intermediate working (but you can if you feel that it helps you).
+
+
+>[!note] Solution
+>| $p$     | $q$     | $p \to q$ | $p \land (p \to q)$ | $p \land q$ |
+| ------- | ------- | --------- | ------------------- | ----------- |
+| $true$  | $true$  | $true$    | $true$              | $true$      |
+| $true$  | $false$ | $false$   | $false$             | $false$     |
+| $false$ | $true$  | $true$    | $false$             | $false$     |
+| $false$ | $false$ | $true$    | $false$             | $false$     |
+>
+>Hence, the two formulae are **equivalent**.
+
+
+---
+# Question 2 (2 marks):
+
+Is the following logical equivalence true?
+
+$$
+\big(p \to \neg q\big) \land \big(\neg p \to q\big) \stackrel{?}{\equiv} \big(p \lor q\big)\land \big(\neg p \lor \neg q\big)
+$$
+
+| $p$     | $q$     | $\big(p \to \neg q\big) \land \big(\neg p \to q\big)$ | $\big(p \lor q\big)\land \big(\neg p \lor \neg q\big)$ |
+| ------- | ------- | ----------------------------------------------------- | ------------------------------------------------------ |
+| $true$  | $true$  |                                                       |                                                        |
+| $true$  | $false$ |                                                       |                                                        |
+| $false$ | $true$  |                                                       |                                                        |
+| $false$ | $false$ |                                                       |                                                        |
+
+Fill out the 8 remaining cells to check whether they are equivalent. You need not show intermediate working (but you can if you feel that it helps you).
+
+
+>[!note] Solution
+>| $p$     | $q$     | $p \to \neg q$ | $\neg p \to q$ | $p \lor q$ | $\neg p \lor \neg q$ | $\big(p \to \neg q\big) \land \big(\neg p \to q\big)$ | $\big(p \lor q\big)\land \big(\neg p \lor \neg q\big)$ |
+| ------- | ------- | -------------- | -------------- | ---------- | -------------------- | ----------------------------------------------------- | ------------------------------------------------------ |
+| $true$  | $true$  | $false$        | $true$         | $true$     | $false$              | $false$                                               | $false$                                                |
+| $true$  | $false$ | $true$         | $true$         | $true$     | $true$               | $true$                                                | $true$                                                 |
+| $false$ | $true$  | $true$         | $true$         | $true$     | $true$               | $true$                                                | $true$                                                 |
+| $false$ | $false$ | $true$         | $false$        | $false$    | $true$               | $false$                                               | $false$                                                |
+>
+>Hence, the two formulae are **equivalent**.
+
+
+---
+
+# Question 3 (4 marks): 
+
+Let $A = \{0, 2, 4, 6, 8\}$ and $B = \{1, 3, 5, 7, 9\}$. Determine which of the following quantified statements are true:
+
+1. $\exists b \in B \ [b < 1]$
+2. $\exists a \in A, \forall b \in B \ [a > b]$
+3. $\forall a \in A \ \big[\neg(\exists b \in B \ [odd(ab)])\big]$
+4. $\exists c  \in B, \forall b \in B, \exists a \in A \ [a + b = c]$ 
+
+You do not have to give a formal proof of the statements; you may simply state whether the statements are true or false.
+
+>[!note] Solution
+>1. **False**. There is no element of $B$ that are smaller than $1$.
+>2. **False**. All the elements of $A$ are smaller than a particular element of $B$, namely $9$.
+>3. **True**. Since every element of $A$ is even, its product with any element of $B$ can never be odd.
+>4. **True**. Let $c = 9 \in B$. Then, no matter which element $b \in B$ is chosen, there will be an element $a \in A$ such that $a + b = 9$. For example, if $b = 4$, then let $a = 5$.
+
+
+---
+
+
+# Question 4 (3 marks):
+
+Prove the following statement:
+
+>[!Theorem]
+>$\forall n \in \mathbb{Z} \ \big[even\big(n(n+1)\big)\big]$
+
+You may use the following definitions of predicates in your proof:
+- $even(x) \equiv \exists k \in \mathbb{Z} \ [x = 2 \cdot k]$
+- $odd(x) \equiv \exists k \in \mathbb{Z} \ [x = 2 \cdot k + 1]$
+
+You may also use the following lemmas in your proof:
+
+>[!Lemma-1]
+>$\forall x \in \mathbb{Z} \ \big[even(x) \lor odd(x)\big]$
+
+Hint: Use lemma 1 to say that $n$ is either even or odd. When that happens, try to prove both cases separately.
+
+We recommend doing the proof step by step following the rules laid out in [[Unit 1#Allowable Rules of Deductions/Inferences]] in case you unsure about which steps are and not allowed. If steps are skipped, it is up to the grader's discretion as to whether to penalise or not.
+
+
+**Solution**:
+
+>[!note] Proof
+>1. Let $n \in \mathbb{Z}$ be arbitrarily chosen.
+>2. $even(n) \lor odd(n)$ \[Universal instantiation on line 1]
+>3. Case 1: $even(n)$
+>	1. $\exists k \in \mathbb{Z}\ [n = 2 \cdot k]$ \[Definition of $even$]
+>	2. Let $t \in \mathbb{Z}$ be such that $n = 2t$. \[Existential instantiation on line 3.1]
+>	3. $n(n+1) = 2t(2t+1) = 2 \cdot t(2t+1)$ \[Basic algebra]
+>	4. Since $t \in \mathbb{Z}$, $t(2t+1) \in \mathbb{Z}$. \[Basic algebra]
+>	5. $\exists k \in \mathbb{Z}\ [n(n+1) = 2 \cdot k]$ \[Existential generalisation on lines 3.3, 3.4]
+>	6. $even\big(n(n+1)\big)$ \[Definition of $even$]
+>4. Case 2: $odd(n)$
+>	1. $\exists k \in \mathbb{Z}\ [n = 2 \cdot k + 1]$ \[Definition of $odd$]
+>	2. Let $t \in \mathbb{Z}$ be such that $n = 2t + 1$. \[Existential instantiation on line 4.1]
+>	3. $n(n+1) = (2t+1)(2t+2) = 2 \cdot (2t+1)(t+1)$ \[Basic algebra]
+>	4. Since $t \in \mathbb{Z}$, $(2t+1)(t+1) \in \mathbb{Z}$. \[Basic algebra]
+>	5. $\exists k \in \mathbb{Z}\ [n(n+1) = 2 \cdot k]$ \[Existential generalisation on lines 4.3, 4.4]
+>	6. $even\big(n(n+1)\big)$ \[Definition of $even$]
+>5. $even\big(n(n+1)\big)$ \[Proof by cases on lines 2, 3.6, 4.6]
+>6. $\forall n \in \mathbb{Z}\ \big[even\big(n(n+1)\big)\big]$ \[Universal generalisation on lines 1, 5]
+
+
+---
+
+# Question 5 (5 marks):
+
+Let $has\_gap(x, y) \equiv \exists q \in \mathbb{Q} \ [x < q \land q < y]$ be the predicate that essentially says "We can find a rational number strictly in between values $x$ and $y$." 
+
+We want to disprove the following statement:
+
+$$
+\forall a \in \mathbb{Z}, \forall b \in \mathbb{Z} \ [has\_gap(a, b)]
+$$
+
+i.e., we believe that it is false. Your friend has already done part of it. In particular, your friend has already negated the statement:
+
+$$
+\exists a \in \mathbb{Z}, \exists b \in \mathbb{Z} \ [\neg has\_gap(a, b)]
+$$
+
+And also started a proof. Your friend's proof has these steps, and they want you to help them fill in the remaining portions of the proof.
+
+1. $1 \in \mathbb{Z}$
+	1. Assume for the sake of contradiction that $has\_gap(1, 1)$.
+	2. ...
+	3. ...
+	4. ...
+	5. ...
+	6. $\bot$
+2.  $\neg has\_gap(1, 1)$ \[Proof by contradiction rule]
+3. $\exists a \in \mathbb{Z}, \exists b \in \mathbb{Z} \ [\neg has\_gap(1,1)]$ \[Existential generalisation on lines 1 and 2]
+
+Fill in the remaining portion of the proof in the middle. You may need more than 4 lines, that is okay, in which case the $\bot$ line should be shifted accordingly. For example if you used 8 lines in your proof after line 1.1, then $\bot$ should be on on line 1.10.
+
+We recommend doing the proof step by step following the rules laid out in [[Unit 1#Allowable Rules of Deductions/Inferences]] in case you unsure about which steps are and not allowed. If steps are skipped, it is up to the grader's discretion as to whether to penalise or not.
+
+
+**Solution**:
+
+>[!note] Proof
+>1. $1 \in \mathbb{Z}$. \[Basic algebra]
+>2. Assume, for the sake of contradiction, that $has\_gap(1, 1)$.
+>	1. $\exists q \in \mathbb{Q}\ [1 < q \land q < 1]$ \[Definition of $has\_gap$]
+>	2. Let $r \in \mathbb{Q}$ be such that $1 < r \land r < 1$. \[Existential instantiation on line 2.1]
+>	3. $1 < 1$ \[Basic algebra (by transitivity of $<$)]
+>	4. $\neg(1 = 1)$ \[Basic algebra]
+>	5. $1 = 1$ \[Basic algebra]
+>	6. $(1 = 1) \land \neg(1 = 1)$ \[Conjunction on lines 2.4, 2.5]
+>	7. $\bot$. \[Contradiction rule on line 2.6]
+>3. $\neg has\_gap(1, 1)$ \[Proof by contradiction rule on lines 2, 2.7]
+>4. $\exists a \in \mathbb{Z}, \exists b \in \mathbb{Z}\ [\neg hap\_gap(a, b)]$ \[Existential generalisation on lines 1, 3]
+
+
+---
+
+# Bonus Question: (2 marks)
+
+Assume every person either only tell lies (knave) or only speaks the truth (knight). A family of 4 say the following the statements:
+
+Agnes: "Edith and Gru are of the same type."
+Edith: "Margo is a knave."
+Margo: "Gru is a knight."
+Gru: "Agnes is lying!"
+
+We can use predicates to encode these statements mathematically as follows:
+
+1. $Knave(x)$ means $x$ is a knave.
+2. $Knight(x)$ means $x$ is a knight.
+3. "Every person is either a knight or a knave" can be written as $\forall p \in Person[ Knight(p) \lor Knave(p) ]$
+4. "Every person cannot be both a knight and a knave" can be written as $\forall p \in Person[\neg( Knight(p) \land Knave(p))]$
+
+For each character, identify whether they are a knight or knave!
+
+**Solution**:
+
+>[!note] Who's a knight and who's a knave?
+>**Knights: Margo, Gru**
+>**Knaves: Agnes, Edith**
+>---
+>**(Informal) Proof**:
+>1. Suppose, for the sake of contradiction, that $Knight(\text{Edith})$. 
+>2.  $Knave(\text{Margo})$ \[Since $\text{Edith}$ tells the truth]
+>3. $Knave(\text{Gru})$ \[Since $\text{Margo}$ tells lies]
+>4. $\text{Agnes}$ is not lying. \[Since $\text{Gru}$ tells lies]
+>5. $\text{Edith}$ and $\text{Gru}$ are of the same type. \[Since $\text{Agnes}$ tells the truth]
+>6. $Knight(\text{Edith}) \land Knave(\text{Gru})$. \[Conjunction on lines 1, 3]
+>7. $\bot$. \[Contradiction, based on line 5, 6]
+>8. $Knave(\text{Edith})$. \[Proof by contradiction rule on line 7]
+>9. $Knight(\text{Margo})$. \[Since $\text{Edith}$ tells lies]
+>10. $Knight(\text{Gru})$. \[Since $\text{Margo}$ tells the truth]
+>11. $Knave(\text{Agnes})$. \[Since $\text{Gru}$ tells the truth, i.e., $\text{Agnes}$ lies]
+
+
